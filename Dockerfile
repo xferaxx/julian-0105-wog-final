@@ -21,4 +21,4 @@ ENV FLASK_APP=main_score.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Run Flask when the container launches
-CMD ["flask", "--host=0.0.0.0",]
+CMD ["flask", "run"]
