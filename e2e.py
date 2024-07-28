@@ -6,7 +6,7 @@ import sys
 
 # Configuration for WebDriver
 CHROME_DRIVER_PATH = 'C:/Users/PC/PycharmProjects/wog/ChromeDrive/chromedriver-win64/chromedriver.exe'
-URL = 'http://127.0.0.1:5000/'
+URL = 'http://127.0.0.1:8777/'
 
 
 def test_scores_service(application_url):
