@@ -11,3 +11,5 @@ services:
     environment:
       - FLASK_APP=main_score.py
       - FLASK_RUN_HOST=0.0.0.0
+    volumes:
+      - C:/Users/PC/PycharmProjects/wog/Scores.txt:/app/Scores.txt
