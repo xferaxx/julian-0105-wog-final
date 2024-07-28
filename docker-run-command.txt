@@ -101,8 +101,11 @@ web-1  |  * Running on http://127.0.0.1:5000
 3)docker-compose push = (Push the docker image to docker hub)
 
 
-you can use >>>>> ( docker pull xferax/flask-app ) to download the image from docker hub
+you can use >>>>> ( docker pull xferax/flask-app:1.2 ) to download the image from docker hub
 
+OR
+
+use the command : docker run -d -p 5000:5000 xferax/flask-app:1.2 = to download and run it at the same time at port 5000
 
 ###########################################
 
@@ -137,6 +140,8 @@ and the imaged pushed to DockerHub
 if you want to download the image from docker hub
 
 use the command: docker pull xferax/jenkinsimg
+
+or use the command : ( docker run -d -p 8777:5000 --name flask_app -v C:/Users/PC/PycharmProjects/wog/Scores.txt:/app/Scores.txt xferax/jenkinsimg:latest ) to run it
 
 
 
