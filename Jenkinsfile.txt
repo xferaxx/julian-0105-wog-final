@@ -1,0 +1,79 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/xferaxx/julian-0105-wog-final.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    bat 'docker build -t jenkinsimg:0.2 .'
+                }
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    bat 'docker rm -f flask_app || true'
+                    bat 'docker run -d -p 8777:5000 --name flask_app -v C:/Users/PC/PycharmProjects/wog/Scores.txt:/app/Scores.txt jenkinsimg:0.2'
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    bat 'pip install selenium'
+                }
+            }
+        }
+
+        stage('Wait for Service to Start') {
+            steps {
+                script {
+                    bat 'ping -n 30 127.0.0.1 >nul' // Increase the wait time
+                }
+            }
+        }
+
+        stage('Debug Docker Container') {
+            steps {
+                script {
+                    bat 'docker ps -a'  // Check the status of all containers
+                    bat 'curl http://127.0.0.1:8777'  // Check if the service is reachable
+                }
+            }
+        }
+
+        stage('Test Application') {
+            steps {
+                script {
+                    bat 'python C:/Users/PC/PycharmProjects/wog/e2e.py || exit 1'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                withCredentials([usernamePassword(credentialsId: '17b7ef5d-56a6-4913-890b-0453d0d676d4', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                    bat 'docker login -u %DOCKER_HUB_USERNAME% -p %DOCKER_HUB_PASSWORD%'
+                    bat 'docker tag jenkinsimg:0.2 xferax/jenkinsimg:latest'
+                    bat 'docker push xferax/jenkinsimg:latest'
+                }
+            }
+        }
+        always {
+            script {
+                echo 'Pipeline stage completed.'
+                bat 'docker rm -f flask_app || true'  // Ensure the container is removed at the end of the pipeline
+            }
+        }
+    }
+}
