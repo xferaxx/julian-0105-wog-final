@@ -104,5 +104,43 @@ web-1  |  * Running on http://127.0.0.1:5000
 you can use >>>>> ( docker pull xferax/flask-app ) to download the image from docker hub
 
 
+###########################################
+
+
+Jenkins 
+
+i open Jenkins and Run and i created an agent
+then i created a Pipeline called pip-flask01
+
+and i created a stage to checkout the project from GitHub
+then to build a docker image for that project
+after that we run the docker container
+then we test the flask server 
+and at the end if all is succeed we push the new image we created to docker hub
+
+
+when Jenkins is building we can check the image and the container if all is working live
+
+use command: docker ps
+
+we will see the container is running and the flask server is running on port 8777
+
+CONTAINER ID   IMAGE            COMMAND       CREATED          STATUS          PORTS                    NAMES
+3cce3eb907eb   jenkinsimg:0.2   "flask run"   28 seconds ago   Up 26 seconds   0.0.0.0:8777->5000/tcp   flask_app
+
+if we run 127.0.0.1:8777 we can see the score 
+
+after that the container is being removed
+
+and the imaged pushed to DockerHub
+
+if you want to download the image from docker hub
+
+use the command: docker pull xferax/jenkinsimg
+
+
+
+
+
 
 
