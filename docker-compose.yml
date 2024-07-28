@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8777:5000"
+      - "8777:8777"
     image: xferax/flask-app:1.2
     environment:
       - FLASK_APP=main_score.py
