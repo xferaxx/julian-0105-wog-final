@@ -111,7 +111,7 @@ web-1  |  * Running on http://127.0.0.1:5000
 Jenkins 
 
 i open Jenkins and Run it at CMD using the Jenkins.war file and i created an agent
-then i created a Pipeline called pip-flask01
+then i created a Pipeline called pl-flask
 
 and i created :
 1) stage 1 = a stage to checkout the project from GitHub
