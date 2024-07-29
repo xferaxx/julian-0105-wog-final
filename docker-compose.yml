@@ -11,4 +11,3 @@ services:
     environment:
       - FLASK_APP=main_score.py
       - FLASK_RUN_HOST=0.0.0.0
-
