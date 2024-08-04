@@ -6,4 +6,3 @@ welcome()
 
 # send to start_play() function
 start_play()
-.
