@@ -73,7 +73,7 @@ pipeline {
         success {
             script {
                 //i Created credentialsId in credentials using username and pass of DockerHub
-                withCredentials([usernamePassword(credentialsId: '17b7ef5d-56a6-4913-890b-0453d0d676d4', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: ' your credentialsId ', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                     bat 'docker login -u %DOCKER_HUB_USERNAME% -p %DOCKER_HUB_PASSWORD%'
                     bat 'cd C:\\Users\\PC\\PycharmProjects\\wog'
                     bat 'docker-compose push'// i used it to push the image to DockerHub
